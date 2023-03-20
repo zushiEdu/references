@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=IBM+Plex+Mono&display=swap");
+
+html {
+    font-family: "Barlow", sans-serif;
+}
+
+.body {
+    --bg: #1E1E3C;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    background-color: var(--bg);
+}
+
+a {
+    text-decoration: none;
+    --lnk: #8F8F8F;
+    color: var(--lnk);
+    font-weight: 800;
+}
+
+div {
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul {
+    display: flex;
+    margin: auto;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+}
+
+#main-renderer {
+    font-family: "IBM Plex Mono";
+    padding: 20px 0px;
+    font-size: 30px;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    line-height: 1.15;
+}
+
+.sesame-seeds {
+    --headers: #8F8F8F;
+    color: var(--headers);
+    margin-bottom: 1;
+}
+
+.theme {
+    --bc: #3E5366;
+    border-style: hidden;
+    background-color: var(--bc);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.theme:active {
+    --hghltd: #728ca3;
+    background-color: var(--hghltd);
+}
+
+.fluff {
+    --text: #8F8F8F;
+    color: var(--text);
+}
+
+#meat {
+    --cbg: #00010d;
+    background-color: var(--cbg);
+    border-radius: 10px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+}
+#bottom-bun {
+    margin-top: auto;
+}
