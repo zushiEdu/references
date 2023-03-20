@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-  <html>
-   <head>
-     <title>Title of the document</title>
-   </head>
+<html>
+  <head>
+    <title>Link List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    <body>
-      <a href="https://google.com">https://google.com</a>
-    </body>
+  <body class="body" style="--bg: #1e1e3c">
+    <div id="top-bun">
+      <h1 class="sesame-seeds">Link List</h1>
+      <button class="theme" onclick="themeChange()">
+        <p class="fluff" style="margin: 0">Change Theme</p>
+      </button>
+      <p class="fluff">
+        Hi there, I’m Ethan Huber’s website. Nice to meet you. You’re probably
+        wondering what I’m all about. Well, let me tell you. I’m a collection of
+        all the links that Ethan has used in his life. That’s right, all of
+        them. From the first website he ever visited to the last one he clicked
+        on before you came here, I have them all stored and organized for your
+        viewing pleasure. Why? Well, that’s a good question. Maybe Ethan likes
+        to keep track of his digital footprint. Maybe he wants to share his
+        interests and passions with the world. Maybe he just has too much time
+        on his hands. Whatever the reason, I’m happy to serve you.
+      </p>
+    </div>
+
+    <div>
+      <a style="text-decoration: none" id="links"></a>
+    </div>
+
+    <script>
+      fetch("list.txt")
+        .then((response) => response.text())
+        .then((text) => {
+          const links = text.split("\n").sort();
+          const list = document.getElementById("links");
+          for (const link of links) {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = link;
+            a.textContent = link;
+            li.appendChild(a);
+            list.appendChild(li);
+          }
+        });
+
+      function updateTheme() {
+        const background = document.getElementsByClassName("body");
+        const links = document.getElementsByClassName("b");
+        const fluff = document.getElementsByClassName("fluff");
+        const headers = document.getElementsByClassName("sesame-seeds");
+        const buttons = document.getElementsByClassName("theme");
+        if (localStorage.getItem("dark") == 1) {
+          // find all elements with matching class names and set their theme corresponding color
+          for (let a = 0; a < background.length; a++) {
+            background[a].style.setProperty("--bg", "#f2f2f2");
+          }
+          for (let b = 0; b < links.length; b++) {
+            links[b].style.setProperty("--lnk", "#465e73");
+          }
+          for (let c = 0; c < fluff.length; c++) {
+            fluff[c].style.setProperty("--text", "#00010d");
+          }
+          for (let d = 0; d < headers.length; d++) {
+            headers[d].style.setProperty("--headers", "#00010d");
+          }
+          for (let e = 0; e < buttons.length; e++) {
+            buttons[e].style.setProperty("--bc", "#a8b5bf");
+          }
+        } else {
+          // find all elements with matching class names and set their theme corresponding color
+          for (let a = 0; a < background.length; a++) {
+            background[a].style.setProperty("--bg", "#1E1E3C");
+          }
+          for (let b = 0; b < links.length; b++) {
+            links[b].style.setProperty("--lnk", "#8F8F8F");
+          }
+          for (let c = 0; c < fluff.length; c++) {
+            fluff[c].style.setProperty("--text", "#8F8F8F");
+          }
+          for (let d = 0; d < headers.length; d++) {
+            headers[d].style.setProperty("--headers", "#8F8F8F");
+          }
+          for (let e = 0; e < buttons.length; e++) {
+            buttons[e].style.setProperty("--bc", "#3E5366");
+          }
+        }
+      }
+
+      function themeChange() {
+        if (localStorage.getItem("dark") == 1) {
+          // make theme dark
+          localStorage.setItem("dark", 0);
+          updateTheme();
+        } else {
+          // make theme light
+          localStorage.setItem("dark", 1);
+          updateTheme();
+        }
+      }
+    </script>
+  </body>
 </html>
