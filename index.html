@@ -15,6 +15,7 @@
         <p class="fluff" style="margin: 0">Change Theme</p>
       </button>
       <p class="fluff">
+        (This section is written by Bings AI Bot). <br />
         Hi there, I’m Ethan Huber’s website. Nice to meet you. I’m a collection
         of all the links that Ethan has used in school/personal projects
         starting on Tuesday, March 21st. I have them all stored and organized
@@ -22,8 +23,11 @@
         Ethan likes to keep track of his digital footprint. Maybe he wants to
         share his interests and passions with the world. Maybe he just has too
         much time on his hands. Whatever the reason, I’m happy to serve you.
-        <br />(This section is written by Bings AI Bot).
       </p>
+    </div>
+
+    <div>
+      <p style="font-style: italic" class="fluff" id="counter"></p>
     </div>
 
     <div>
@@ -42,9 +46,7 @@
             href="https://github.com/zushiEdu/references"
             ><p class="b">Repository</p></a
           >
-          <a style="text-decoration: none"
-            ><p class="b">Idea Credit To Class of 2024</p></a
-          >
+          <p class="b">Idea Credit To Class of 2024</p>
         </ul>
       </footer>
     </div>
@@ -56,6 +58,7 @@
         .then((text) => {
           const file = text.trim().toLowerCase();
           const links = file.split("\n").sort();
+
           const list = document.getElementById("links");
           for (const link of links) {
             if (link != "") {
@@ -68,8 +71,13 @@
                 div.className = "non-accent";
               }
               div.style = "width:100%";
-              a.href = link;
-              a.textContent = link;
+              a.href = link.replace("www.", "").replace("http://", "https://");
+              a.textContent = link
+                .replace("www.", "")
+                .replace("http://", "https://")
+                .replace(".html", "")
+                .replace(".htm", "");
+              a.target = "_blank";
               li.appendChild(a);
               div.appendChild(li);
               list.appendChild(div);
@@ -77,6 +85,8 @@
             }
           }
           updateTheme();
+          const count = document.getElementById("counter");
+          count.textContent = `List Currently Holds ${links.length} links.`;
         });
 
       function updateTheme() {
