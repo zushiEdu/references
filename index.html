@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Link List</title>
+    <title>Ethan Huber</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./bg.png" />
   </head>
 
   <body class="body" style="--bg: #1e1e3c">
     <div id="top-bun">
-      <h1 class="sesame-seeds">Link List</h1>
+      <h1 class="sesame-seeds">
+        The Wonderful and Hodgepodged Reference Library
+      </h1>
       <button class="theme" onclick="themeChange()">
         <p class="fluff" style="margin: 0">Change Theme</p>
       </button>
       <p class="fluff">
-        Hi there, I’m Ethan Huber’s website. Nice to meet you. You’re probably
-        wondering what I’m all about. Well, let me tell you. I’m a collection of
-        all the links that Ethan has used in his life. That’s right, all of
-        them. From the first website he ever visited to the last one he clicked
-        on before you came here, I have them all stored and organized for your
-        viewing pleasure. Why? Well, that’s a good question. Maybe Ethan likes
-        to keep track of his digital footprint. Maybe he wants to share his
-        interests and passions with the world. Maybe he just has too much time
-        on his hands. Whatever the reason, I’m happy to serve you.
+        Hi there, I’m Ethan Huber’s website. Nice to meet you. I’m a collection
+        of all the links that Ethan has used in school/personal projects
+        starting on Tuesday, March 21st. I have them all stored and organized
+        for your viewing pleasure. Why? Well, that’s a good question. Maybe
+        Ethan likes to keep track of his digital footprint. Maybe he wants to
+        share his interests and passions with the world. Maybe he just has too
+        much time on his hands. Whatever the reason, I’m happy to serve you.
+        <br />(This section is written by Bings AI Bot).
       </p>
     </div>
 
@@ -28,20 +30,53 @@
       <a style="text-decoration: none" id="links"></a>
     </div>
 
+    <div id="bottom-bun">
+      <footer>
+        <ul>
+          <p class="fluff">Started By Ethan Huber On 19/03/23</p>
+          <a style="text-decoration: none" href="https://github.com/zushiEdu/"
+            ><p class="b">Github</p></a
+          >
+          <a
+            style="text-decoration: none"
+            href="https://github.com/zushiEdu/references"
+            ><p class="b">Repository</p></a
+          >
+          <a style="text-decoration: none"
+            ><p class="b">Idea Credit To Class of 2024</p></a
+          >
+        </ul>
+      </footer>
+    </div>
+
     <script>
+      var accent = true;
       fetch("list.txt")
         .then((response) => response.text())
         .then((text) => {
-          const links = text.split("\n").sort();
+          const file = text.trim().toLowerCase();
+          const links = file.split("\n").sort();
           const list = document.getElementById("links");
           for (const link of links) {
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            a.href = link;
-            a.textContent = link;
-            li.appendChild(a);
-            list.appendChild(li);
+            if (link != "") {
+              const div = document.createElement("div");
+              const li = document.createElement("li");
+              const a = document.createElement("a");
+              if (accent) {
+                div.className = "accent";
+              } else {
+                div.className = "non-accent";
+              }
+              div.style = "width:100%";
+              a.href = link;
+              a.textContent = link;
+              li.appendChild(a);
+              div.appendChild(li);
+              list.appendChild(div);
+              accent = !accent;
+            }
           }
+          updateTheme();
         });
 
       function updateTheme() {
@@ -50,8 +85,11 @@
         const fluff = document.getElementsByClassName("fluff");
         const headers = document.getElementsByClassName("sesame-seeds");
         const buttons = document.getElementsByClassName("theme");
+        const accent = document.getElementsByClassName("accent");
         if (localStorage.getItem("dark") == 1) {
           // find all elements with matching class names and set their theme corresponding color
+
+          //light mode
           for (let a = 0; a < background.length; a++) {
             background[a].style.setProperty("--bg", "#f2f2f2");
           }
@@ -67,8 +105,13 @@
           for (let e = 0; e < buttons.length; e++) {
             buttons[e].style.setProperty("--bc", "#a8b5bf");
           }
+          for (let f = 0; f < accent.length; f++) {
+            accent[f].style.setProperty("--ac", "#cecece");
+          }
         } else {
           // find all elements with matching class names and set their theme corresponding color
+
+          //dark mode
           for (let a = 0; a < background.length; a++) {
             background[a].style.setProperty("--bg", "#1E1E3C");
           }
@@ -84,6 +127,9 @@
           for (let e = 0; e < buttons.length; e++) {
             buttons[e].style.setProperty("--bc", "#3E5366");
           }
+          for (let f = 0; f < accent.length; f++) {
+            accent[f].style.setProperty("--ac", "#2f2f5e");
+          }
         }
       }
 
@@ -91,12 +137,11 @@
         if (localStorage.getItem("dark") == 1) {
           // make theme dark
           localStorage.setItem("dark", 0);
-          updateTheme();
         } else {
           // make theme light
           localStorage.setItem("dark", 1);
-          updateTheme();
         }
+        updateTheme();
       }
     </script>
   </body>

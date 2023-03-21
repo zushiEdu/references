@@ -20,6 +20,21 @@ a {
     font-weight: 800;
 }
 
+.accent{
+    --bg:#2f2f5e;    
+    margin-top: 10px;
+    padding-top:5px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    background-color: var(--ac);
+    border-radius: 5px;
+    overflow-wrap: break-word;
+}
+
+.non-accent{
+    overflow-wrap: break-word;
+}
+
 div {
     width: 55%;
     margin-left: auto;
@@ -36,6 +51,10 @@ ul {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0;
+}
+
+li{
+    margin-left: 10px;
 }
 
 #main-renderer {
