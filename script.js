@@ -17,7 +17,7 @@ fetch("list.txt")
                     div.className = "non-accent";
                 }
                 div.style = "width:100%";
-                a.href = link.replace("www.", "").replace("http://", "https://");
+                a.href = link.replace("www.", "");
                 a.textContent = link
                     .replace("www.", "")
                     .replace("http://", "https://")
