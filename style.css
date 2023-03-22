@@ -15,7 +15,7 @@ html {
 
 a {
     text-decoration: none;
-    --lnk: #8F8F8F;
+    --lnk: #888897;
     color: var(--lnk);
     font-weight: 800;
 }
@@ -54,7 +54,7 @@ ul {
 }
 
 li{
-    margin-left: 25px;
+    margin-right: 5px;
     --lnk: #8F8F8F;
     color: var(--lnk);
 }
@@ -85,6 +85,7 @@ ol{
     background-color: var(--bc);
     border-radius: 5px;
     padding: 15px;
+    margin-right: 5px;
 }
 
 .theme:active {
