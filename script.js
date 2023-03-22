@@ -1,51 +1,93 @@
 var accent = true;
-fetch("list.txt")
-    .then((response) => response.text())
-    .then((text) => {
-        const file = text.trim().toLowerCase();
-        const links = file.split("\n").sort();
+var simplified = (localStorage.getItem("mode") === 'true');
+const modeView = document.getElementById("simplifiedStatus");
 
-        const list = document.getElementById("links");
-        var items = 1;
-        for (const link of links) {
-            if (link != "") {
-                const div = document.createElement("div");
-                const li = document.createElement("li");
-                const a = document.createElement("a");
-                if (accent) {
-                    div.className = "accent";
-                } else {
-                    div.className = "non-accent";
-                }
-                div.style = "width:100%";
+refreshSimplified();
+function displayURLs() {
+    fetch("list.txt")
+        .then((response) => response.text())
+        .then((text) => {
+            const file = text.trim().toLowerCase();
+            const links = file.split("\n").sort();
 
-                if (items < 10) {
-                    li.style = `margin-left: 25px`;
-                } else if (items < 100) {
-                    li.style = `margin-left: 30px`;
-                } else if (items < 1000) {
-                    li.style = `margin-left: 40px`;
-                } else if (items < 10000) {
-                    li.style = `margin-left: 45px`;
+            const list = document.getElementById("links");
+            list.innerHTML = ``;
+            var items = 1;
+            for (const link of links) {
+                if (link != "") {
+                    // create constants
+                    const div = document.createElement("div");
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+
+                    // set accent slots
+                    if (accent) {
+                        div.className = "accent";
+                    } else {
+                        div.className = "non-accent";
+                    }
+                    div.style = "width:100%";
+
+                    // auto margin
+                    if (items < 10) {
+                        li.style = `margin-left: 25px`;
+                    } else if (items < 100) {
+                        li.style = `margin-left: 30px`;
+                    } else if (items < 1000) {
+                        li.style = `margin-left: 40px`;
+                    } else if (items < 10000) {
+                        li.style = `margin-left: 45px`;
+                    }
+
+                    a.href = link;
+                    // show view based on mode
+                    if (simplified) {
+                        a.textContent = link
+                            .replace("www.", "")
+                            .replace("http://", "https://")
+                            .replace(".html", "")
+                            .replace(".htm", "");
+                    } else {
+                        a.textContent = link;
+                    }
+
+                    // apply elements
+                    a.target = "_blank";
+                    li.appendChild(a);
+                    div.appendChild(li);
+                    list.appendChild(div);
+
+                    // iterate
+                    accent = !accent;
+                    items++;
                 }
-                a.href = link.replace("www.", "");
-                a.textContent = link
-                    .replace("www.", "")
-                    .replace("http://", "https://")
-                    .replace(".html", "")
-                    .replace(".htm", "");
-                a.target = "_blank";
-                li.appendChild(a);
-                div.appendChild(li);
-                list.appendChild(div);
-                accent = !accent;
-                items++;
             }
-        }
-        updateTheme();
-        const count = document.getElementById("counter");
-        count.textContent = `List Currently Holds ${links.length} links.`;
-    });
+            updateTheme();
+            const count = document.getElementById("counter");
+            count.textContent = `List Currently Holds ${links.length} links.`;
+        });
+}
+
+function switchSimplified() {
+    if (simplified) {
+        simplified = false;
+        modeView.innerText = "Simplified";
+    } else {
+        simplified = true;
+        modeView.innerText = "Full URLs";
+    }
+    localStorage.setItem("mode", simplified);
+    displayURLs();
+}
+
+function refreshSimplified() {
+    if (simplified) {
+        modeView.innerText = "Full URLs";
+    } else {
+        modeView.innerText = "Simplified";
+    }
+    displayURLs();
+}
 
 function updateTheme() {
     const background = document.getElementsByClassName("body");
