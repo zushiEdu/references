@@ -54,9 +54,13 @@ ul {
 }
 
 li{
-    margin-left: 40px;
+    margin-left: 25px;
     --lnk: #8F8F8F;
     color: var(--lnk);
+}
+
+ol{
+    padding-left: 0px;
 }
 
 #main-renderer {

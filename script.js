@@ -6,6 +6,7 @@ fetch("list.txt")
         const links = file.split("\n").sort();
 
         const list = document.getElementById("links");
+        var items = 1;
         for (const link of links) {
             if (link != "") {
                 const div = document.createElement("div");
@@ -17,6 +18,16 @@ fetch("list.txt")
                     div.className = "non-accent";
                 }
                 div.style = "width:100%";
+
+                if (items < 10) {
+                    li.style = `margin-left: 25px`;
+                } else if (items < 100) {
+                    li.style = `margin-left: 30px`;
+                } else if (items < 1000) {
+                    li.style = `margin-left: 40px`;
+                } else if (items < 10000) {
+                    li.style = `margin-left: 45px`;
+                }
                 a.href = link.replace("www.", "");
                 a.textContent = link
                     .replace("www.", "")
@@ -28,6 +39,7 @@ fetch("list.txt")
                 div.appendChild(li);
                 list.appendChild(div);
                 accent = !accent;
+                items++;
             }
         }
         updateTheme();
