@@ -62,3 +62,4 @@ https://www.apple.com/supplier-responsibility/
 https://www.investopedia.com/terms/m/mooreslaw.asp
 https://www.techinsights.com/blog/apple-iphone-xs-max-teardown
 http://www.designlife-cycle.com/new-page-53
+https://github.com/bancika/diy-layout-creator

@@ -46,7 +46,8 @@ function displayURLs() {
                             .replace("www.", "")
                             .replace("http://", "https://")
                             .replace(".html", "")
-                            .replace(".htm", "");
+                            .replace(".htm", "")
+                            .replace(".pdf", "");
                     } else {
                         a.textContent = link;
                     }
