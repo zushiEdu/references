@@ -1,9 +1,10 @@
-var accent = true;
+var accent;
 var simplified = (localStorage.getItem("mode") === 'true');
 const modeView = document.getElementById("simplifiedStatus");
 
 refreshSimplified();
 function displayURLs() {
+    accent = true;
     fetch("list.txt")
         .then((response) => response.text())
         .then((text) => {
